@@ -1,3 +1,8 @@
+import { SimpleMessage } from "@/components/layout/messages/SimpleMessage";
+import { FooterPage } from "@/components/layout/navigations/FooterPage";
+import { HeaderPage } from "@/components/layout/navigations/HeaderPage";
+import { Menu } from "@/components/layout/navigations/Menu";
+import { Providers } from "@/lib/provider-query";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -23,12 +28,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header className="border-b-1 border-secondary">
+            <SimpleMessage
+              message={"Mensagens promocionais para os clientes"}
+            />
+            <HeaderPage />
+            <Menu />
+          </header>
+
+          {children}
+
+          <footer>
+            <FooterPage />
+          </footer>
+        </body>
+      </html>
+    </Providers>
   );
 }
